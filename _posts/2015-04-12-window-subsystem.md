@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "윈도 서브시스템 설정(콘솔 없애기)"
-date:   2015-04-12 16:00:00
+date:   2015-04-12 19:00:00
 categories: rust
 ---
 
@@ -11,7 +11,7 @@ categories: rust
   * Windows : 콘솔 창이 없는 GUI 프로그램
 
 
- ![]({{ site.url }}static/rust-windows-subsystem/vs-linker-setting.png)
+ ![](/static/rust-windows-subsystem/vs-linker-setting.png)
    *Visual Studio 2013의 링커 설정 페이지.*
 
 `rustc`는 윈도 환경에서 기본적으로 Console SubSystem으로 결과물을 생성하지만 링커 옵션을 설정하여 Windows로 설정할 수 있다.
