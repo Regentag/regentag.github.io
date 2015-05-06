@@ -1,0 +1,143 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Just Google It</title>
+	<style>
+		.box
+		{
+			width: 100%;
+			text-align: center;
+		}
+		.content
+		{
+			display: inline-block;
+			margin-top: 30;
+			margin-bottom: 10;
+			line-height: 2;
+			max-width: 800;
+		}
+		.ref
+		{
+			display: inline-block;
+			margin-top: 10;
+			line-height: 1;
+			max-width: 800;
+			font-size: 0.8em;
+		}
+	</style>
+	<script src="/static/jquery-1.11.3.min.js"></script>
+	<script>
+// http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+// Read a page's GET URL variables and return them as an associative array.
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+function searchDirect()
+{
+	var p = $("#search_param").val();
+	var url;
+	if( p )
+	{
+		url = "https://www.google.co.kr/search?q=" + p;
+	}
+	else
+	{
+		url = "https://www.google.co.kr";
+	}
+
+	alert( url );
+	window.location.href = url;
+}
+
+var countDown = 10;
+var searchFunc;
+
+function spawnTimer( f )
+{
+	$("#time").text( countDown );
+	setTimeout( f, 1000);
+}
+
+$(document).ready(function ()
+{
+	var params = getUrlVars();
+	var query = params["q"];
+	if( query )
+	{
+		$("#search_param").val( decodeURIComponent(query) );
+		var url = "https://www.google.co.kr/search?q=" + query;
+		searchFunc = function()
+		{
+			if( countDown > 1 )
+			{
+				countDown -= 1;
+				spawnTimer( searchFunc );
+			}
+			else
+			{
+				window.location.href = url;
+			}
+		};
+
+		spawnTimer( searchFunc );
+	}
+	else
+	{
+		$("#countdown").hide();
+	}
+});
+	</script>
+</head>
+<body>
+	<div class="box">
+	<h1>
+		질문하기 전에
+		<a href="https://www.google.co.kr">
+			<img src="./Logo_Google_2013_Official.svg.png">
+		</a>
+		하세요.
+	</h1>
+	<div class="content">
+		이 세상의 모든 똑똑한 사람들은 <a href="https://www.google.co.kr">Google</a>를 사용하고 있습니다.
+		물론 당신은 그들 중의 한명이 아니구요.
+	</div>
+	<p />
+	<div class="content">
+		당신이 지금 이 페이지를 보고 있다는 것은 어딘가의 커뮤니티에 <strong>멍청한</strong> 질문을 올렸거나,
+		한번만 검색해도 답을 얻을 수 있는 질문을 하기 위해 인터넷 자원을 낭비하는 <strong>게으름뱅이</strong>라는 뜻입니다.
+		당신의 질문이 답해줄 만 한 가치가 있는 것이었다면 이런 페이지로 오는 링크를 받지는 않았겠죠.
+	</div>
+	<p />
+	<div class="content">
+		질문하기 전에 <a href="https://www.google.co.kr">Google</a> 하세요. 당신의 멍청함을 모두의 앞에서 뽐내는 대신에 말이죠.
+	</div>
+	<p />
+	<div class="content">
+		<img src="./Logo_Google_2013_Official.svg.png" height="20">
+		<input id="search_param" type="text"> <button onclick="searchDirect()">검색</button>
+	</div>
+	<p />
+	<div id="countdown" class="content">
+		<strong><span id="time"></span></strong>초 뒤에 자동으로 검색합니다.
+	</div>
+	<p />
+	<hr />
+	<div class="ref">
+		<strong>국제 검색엔진 사용자 협회 아시아 태평양 지부</strong>
+		<p />
+		이곳으로 오는 링크를 만들고 싶은가요?
+		<a href="./gen.html">여기</a>로 와 주세요.
+	</div>
+	</div>
+</body>
+</html>

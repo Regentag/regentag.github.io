@@ -1,0 +1,84 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Just Google It - Gen</title>
+	<style>
+		.box
+		{
+			width: 100%;
+			text-align: center;
+		}
+		.content
+		{
+			display: inline-block;
+			margin-top: 30;
+			line-height: 2;
+			max-width: 800;
+		}
+		.ref
+		{
+			display: inline-block;
+			margin-top: 50;
+			line-height: 1;
+			max-width: 800;
+			font-size: 0.8em;
+		}
+		.url
+		{
+			border: 2px solid green;
+			font-size: 1.2em;
+			padding: 3px;
+			text-align: center;
+		}
+	</style>
+	<script src="/static/jquery-1.11.3.min.js"></script>
+	<script>
+function genURL()
+{
+	var p = $("#search_param").val();
+	var url = "https://regentag.github.io/static/googleit/googleit.html?q="
+		+ encodeURIComponent(p);
+
+	$("#url_view").show();
+	$("#url_result").val( url );
+	$("#url_result").select();
+
+	$("#search_param").val("");
+}
+$(document).ready(function ()
+{
+	$("#url_view").hide();
+});
+	</script>
+</head>
+<body>
+	<div class="box">
+	<h1>
+		질문하기 전에
+		<a href="https://www.google.co.kr">
+			<img src="./Logo_Google_2013_Official.svg.png">
+		</a>
+		하세요.
+	</h1>
+
+	<p />
+	<div class="content">
+		바보들을 상대하느라 힘 빼지 마세요.
+		링크만 던져주세요.
+	</div>
+	<p />
+	<div class="content">
+		<input id="search_param" type="text"> <button onclick="genURL()">만들기</button>
+	</div>
+	<p />
+	<div id="url_view" class="content">
+		<input id="url_result" type="text" class="url" size="60"/>
+	</div>
+	<p/>
+	<hr />
+	<div class="ref">
+		<strong>국제 검색엔진 사용자 협회 아시아 태평양 지부</strong>
+	</div>
+	</div>
+</body>
+</html>
